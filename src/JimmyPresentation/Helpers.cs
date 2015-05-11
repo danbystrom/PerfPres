@@ -3,29 +3,27 @@ using System.Runtime.InteropServices;
 
 namespace JimmyPresentation
 {
-    public static class Helpers
+    public unsafe static class Helpers
     {
-        public static int CopyToByteArray<T>(this T[] array, ref byte[] buffer) where T : struct
+        public static int CopyToByteArray(this TestStruct[] array, ref byte[] buffer)
         {
-            var size = array.Length * Marshal.SizeOf(typeof(T));
+            var size = array.Length * Marshal.SizeOf(typeof(TestStruct));
             if (buffer == null || buffer.Length < size)
                 buffer = new byte[size];
 
-            var h = GCHandle.Alloc(buffer, GCHandleType.Pinned);
-            Marshal.Copy(h.AddrOfPinnedObject(), buffer, 0, size);
-            h.Free();
+            fixed(void* x = array)
+                Marshal.Copy(new IntPtr(x), buffer, 0, size);
             return size;
         }
 
-        public static void CopyFromByteArray<T>(this T[] array, byte[] buffer, int? elements = null) where T : struct
+        public static void CopyFromByteArray(this TestStruct[] array, byte[] buffer, int? elements = null)
         {
-            var size = elements.GetValueOrDefault(array.Length) * Marshal.SizeOf(typeof(T));
+            var size = elements.GetValueOrDefault(array.Length) * Marshal.SizeOf(typeof(TestStruct));
             if(size > buffer.Length)
                 throw new IndexOutOfRangeException();
 
-            var h = GCHandle.Alloc(buffer, GCHandleType.Pinned);
-            Marshal.Copy(buffer, 0, h.AddrOfPinnedObject(), size);
-            h.Free();
+            fixed(void* x = array)
+                Marshal.Copy(buffer, 0, new IntPtr(x), size);
         }
 
     }

@@ -6,9 +6,21 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using ProtoBuf;
 
 namespace JimmyPresentation
 {
+    // protobuf refuses to serialize List<TestStruct[]>.... :-(
+    [ProtoContract]
+    [Serializable]
+    public class SerializeTestClass
+    {
+        [ProtoMember(1)]
+        public TestStruct[] W = Hej.PlayStruct();
+    }
+
+
+    [ProtoContract]
     public class TestClass
     {
         public decimal A;
@@ -22,15 +34,24 @@ namespace JimmyPresentation
     }
 
     [Serializable]
+    [ProtoContract]
     public struct TestStruct
     {
+        [ProtoMember(1)]
         public decimal A;
+        [ProtoMember(2)]
         public decimal B;
+        [ProtoMember(3)]
         public decimal C;
+        [ProtoMember(4)]
         public decimal D;
+        [ProtoMember(5)]
         public decimal E;
+        [ProtoMember(6)]
         public decimal F;
+        [ProtoMember(7)]
         public decimal G;
+        [ProtoMember(8)]
         public decimal H;
     }
 
@@ -40,7 +61,7 @@ namespace JimmyPresentation
         {
             var array = new TestClass[1000000];
             for (var i = 0; i < array.Length; i++)
-                array[i] = new TestClass {H = i+100};
+                array[i] = new TestClass {H = 1000000*i+100};
             for (var i = array.Length - 2; i >= 0; i--)
                 array[i].G = array[i + 1].H;
             for (var i = array.Length - 2; i >= 0; i--)
@@ -62,7 +83,7 @@ namespace JimmyPresentation
         {
             var array = new TestStruct[1000000];
             for (var i = 0; i < array.Length; i++)
-                array[i].H = i+100;
+                array[i].H = 1000000*i+100;
             for (var i = array.Length - 2; i >= 0; i--)
                 array[i].G = array[i + 1].H;
             for (var i = array.Length - 2; i >= 0; i--)

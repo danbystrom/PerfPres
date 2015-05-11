@@ -1,5 +1,7 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
@@ -12,18 +14,12 @@ namespace JimmyPresentation.Tests
     [TestFixture]
     public class SerializationTests
     {
-        [Test]
+        [Test, Explicit]
         public void X()
         {
-            var q = new TestStruct {A = 7};
-            var z = new List<TestStruct[]> { new[] { q } };
-
-            var ms = new MemoryStream();
-            (new BinaryFormatter()).Serialize(ms, z);
-            var b = ms.GetBuffer();
-
-            ms.Seek(0, SeekOrigin.Begin);
-            var c = (List<TestStruct[]>)(new BinaryFormatter()).Deserialize(ms);
+            var x = new TestStruct[1];
+            x[0].E = 42;
+            SqlPersistance.Save(x);
         }
     }
 }
