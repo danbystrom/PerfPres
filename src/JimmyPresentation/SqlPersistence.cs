@@ -1,17 +1,15 @@
-﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace JimmyPresentation
 {
-    public static class SqlPersistance
+    public static class SqlPersistence
     {
+        private const string ConnectionString =
+            @"Data Source=(localdb)\Projects;Initial Catalog=PerfPres;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
+            //@"Data Source=localhost\SQLEXPRESS;Initial Catalog=PerfPres;Integrated Security=SSPI;"
+
         public static DataTable AsDataTable<T>(this IEnumerable<T> data)
         {
             var fields = typeof (T).GetFields();
@@ -31,16 +29,22 @@ namespace JimmyPresentation
             return table;
         }
 
-        public static void Save(TestStruct[] items)
+        public static void CleanUp()
         {
-            // Open a sourceConnection to the AdventureWorks database. 
-            using (var conn = new SqlConnection(@"Data Source=localhost\SQLEXPRESS;Initial Catalog=PerfPres;Integrated Security=SSPI;"))
+            using (var conn = new SqlConnection(ConnectionString))
             {
                 conn.Open();
 
-                //  Delete all from the destination table.         
-                var commandDelete = new SqlCommand {Connection = conn, CommandText = "DELETE FROM dbo.TestStructTable"};
+                var commandDelete = new SqlCommand { Connection = conn, CommandText = "DELETE FROM dbo.TestStructTable" };
                 commandDelete.ExecuteNonQuery();
+            }
+        }
+
+        public static void Save(TestStruct[] items)
+        {
+            using (var conn = new SqlConnection(ConnectionString))
+            {
+                conn.Open();
 
                 var tx = conn.BeginTransaction();
                 using (var bulkCopy = new SqlBulkCopy(conn, SqlBulkCopyOptions.Default, tx))
@@ -55,8 +59,7 @@ namespace JimmyPresentation
 
         public static TestStruct[] Load(int size)
         {
-            // Open a sourceConnection to the AdventureWorks database. 
-            using (var conn = new SqlConnection(@"Data Source=localhost\SQLEXPRESS;Initial Catalog=PerfPres;Integrated Security=SSPI;"))
+            using (var conn = new SqlConnection(ConnectionString))
             {
                 conn.Open();
                 using (var cmd = new SqlCommand())

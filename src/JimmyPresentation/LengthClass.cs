@@ -2,46 +2,46 @@
 {
     public class LengthClass
     {
-        private double _value;
+        private double value;
 
         public double Meters
         {
-            get { return _value; }
+            get { return value; }
         }
 
         public double Centimeters
         {
-            get { return _value * 100; }
+            get { return value * 100; }
         }
 
         public double Millimeters
         {
-            get { return _value * 1000; }
+            get { return value * 1000; }
         }
 
         public double Kilometers
         {
-            get { return _value / 1000; }
+            get { return value / 1000; }
         }
 
         public double Inches
         {
-            get { return _value / 0.0254; }
+            get { return value / 0.0254; }
         }
 
         public double Feet
         {
-            get { return _value / 0.3048; }
+            get { return value / 0.3048; }
         }
 
         public double Miles
         {
-            get { return _value / 1609.3440; }
+            get { return value / 1609.3440; }
         }
 
         private LengthClass(double value)
         {
-            _value = value;
+            this.value = value;
         }
 
         public static LengthClass FromMeters(double value)

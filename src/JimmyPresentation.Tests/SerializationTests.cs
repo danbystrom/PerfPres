@@ -19,7 +19,7 @@ namespace JimmyPresentation.Tests
         {
             var x = new TestStruct[1];
             x[0].E = 42;
-            SqlPersistance.Save(x);
+            SqlPersistence.Save(x);
         }
     }
 }
