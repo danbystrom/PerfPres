@@ -271,16 +271,7 @@ namespace JimmyPresentation
                     sumOfAverages += average;
                 }
                 return sumOfAverages;
-                //var sum = list.Sum(array => TestLength.ConvertToMiles(array).Sum());
-                //var average = list.Average(array => TestLength.ConvertToMiles(array).Average());
-                //var average2 = list.Average(array => TestLength.ConvertToMiles(array).Average());
-                //var average3 = list.Average(array => TestLength.ConvertToMiles(array).Average());
-                //var min = list.Min(array => TestLength.ConvertToMiles(array).Min());
-                //var max = list.Average(array => TestLength.ConvertToMiles(array).Max());
-
-                //return sum + average + average2 + average3 + min + max;
             });
-
         }
 
         private void button7_Click(object sender, EventArgs e)
@@ -303,16 +294,31 @@ namespace JimmyPresentation
                     sumOfAverages += average;
                 }
                 return sumOfAverages;
-
-                //var sum = list.Sum(array => TestLength.ConvertToMiles(array).Sum());
-                //var average = list.Average(array => TestLength.ConvertToMiles(array).Average());
-                //var average2 = list.Average(array => TestLength.ConvertToMiles(array).Average());
-                //var average3 = list.Average(array => TestLength.ConvertToMiles(array).Average());
-                //var min = list.Min(array => TestLength.ConvertToMiles(array).Min());
-                //var max = list.Average(array => TestLength.ConvertToMiles(array).Max());
-
-                //return sum + average + average2 + average3 + min + max;
             });
+        }
+
+        private void button8_Click(object sender, EventArgs e)
+        {
+            benchmark("double in a struct[]", sender, () =>
+            {
+                var list = new List<Length[]>();
+                for (var i = 0; i < 10; i++)
+                {
+                    var array = new Length[100000];
+                    list.Add(array);
+                    for (var j = 0; j < 100; j++)
+                        TestLength.FillLengthArray(array);
+                }
+
+                double sumOfAverages = 0;
+                for (int i = 0; i < 30; i++)
+                {
+                    var average = list.Average(array => TestLength.ConvertToMiles(array).Average());
+                    sumOfAverages += average;
+                }
+                return sumOfAverages;
+            });
+
         }
 
     }
