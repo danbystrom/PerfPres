@@ -1,6 +1,4 @@
-﻿using System.Windows.Forms;
-
-namespace JimmyPresentation
+﻿namespace JimmyPresentation
 {
     public struct Length
     {

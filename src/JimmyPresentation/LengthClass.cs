@@ -2,7 +2,7 @@
 {
     public class LengthClass
     {
-        private double _value;
+        private readonly double _value;
 
         public double Meters
         {
@@ -41,7 +41,7 @@
 
         private LengthClass(double value)
         {
-            _value = value;
+            this._value = value;
         }
 
         public static LengthClass FromMeters(double value)

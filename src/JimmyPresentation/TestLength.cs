@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace JimmyPresentation
 {
@@ -26,19 +23,38 @@ namespace JimmyPresentation
                 array[i] = LengthClass.FromMeters(i);
         }
 
-        public static IEnumerable<double> ConverToMiles(IEnumerable<double> meters)
+        public static void FillDoublePlusUnitArrayWithMeters(DoublePlusUnit[] array)
+        {
+            for (var i = 0; i < array.Length; i++)
+                array[i] = new DoublePlusUnit {Unit = Units.Meters, Value = i};
+        }
+
+        public static IEnumerable<double> ConvertToMiles(IEnumerable<double> meters)
         {
             return meters.Select(_ => _/1609.3440);
         }
 
-        public static IEnumerable<double> ConverToMiles(IEnumerable<Length> lengths)
+        public static IEnumerable<double> ConvertToMiles(IEnumerable<Length> lengths)
         {
             return lengths.Select(_ => _.Miles);
         }
 
-        public static IEnumerable<double> ConverToMiles(IEnumerable<LengthClass> lengths)
+        public static IEnumerable<double> ConvertToMiles(IEnumerable<LengthClass> lengths)
         {
             return lengths.Select(_ => _.Miles);
+        }
+
+        public static IEnumerable<double> ConvertToMiles(IEnumerable<DoublePlusUnit> lengths)
+        {
+            var result = new List<double>();
+            foreach (var dpu in lengths)
+            {
+                if (dpu.Unit == Units.Meters)
+                    result.Add(dpu.Value / 1609.3440);
+                else
+                    result.Add(dpu.Value);
+            }
+            return result;
         }
 
     }

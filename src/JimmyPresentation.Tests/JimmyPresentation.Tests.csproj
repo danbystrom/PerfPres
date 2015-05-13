@@ -50,9 +50,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="SerializationTests.cs" />
-    <Compile Include="ZipCodeTests.cs" />
     <Compile Include="LengthTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TestArrayCopying.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
