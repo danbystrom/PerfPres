@@ -37,22 +37,26 @@
             this.btnDeserializeJson = new System.Windows.Forms.Button();
             this.btnSerializeJson = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnSerializeSql = new System.Windows.Forms.Button();
             this.btnSerializeStructArray = new System.Windows.Forms.Button();
             this.btnSerializeProtoBuf = new System.Windows.Forms.Button();
             this.btnSerializeBinaryFormatter = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnDeserializeSql = new System.Windows.Forms.Button();
             this.btnDeserializeStructArray = new System.Windows.Forms.Button();
             this.btnDeserializeProtoBuf = new System.Windows.Forms.Button();
             this.btnDeserializeBinaryFormatter = new System.Windows.Forms.Button();
-            this.btnSerializeSql = new System.Windows.Forms.Button();
-            this.btnDeserializeSql = new System.Windows.Forms.Button();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(37, 25);
+            this.button1.Location = new System.Drawing.Point(6, 25);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(139, 33);
             this.button1.TabIndex = 0;
@@ -62,7 +66,7 @@
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(37, 64);
+            this.button2.Location = new System.Drawing.Point(6, 61);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(139, 33);
             this.button2.TabIndex = 1;
@@ -72,16 +76,18 @@
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(437, 12);
+            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.textBox1.Location = new System.Drawing.Point(369, 12);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
             this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.textBox1.Size = new System.Drawing.Size(405, 257);
+            this.textBox1.Size = new System.Drawing.Size(473, 375);
             this.textBox1.TabIndex = 2;
             // 
             // button3
             // 
-            this.button3.Location = new System.Drawing.Point(37, 149);
+            this.button3.Location = new System.Drawing.Point(6, 63);
             this.button3.Name = "button3";
             this.button3.Size = new System.Drawing.Size(139, 33);
             this.button3.TabIndex = 4;
@@ -91,7 +97,7 @@
             // 
             // button4
             // 
-            this.button4.Location = new System.Drawing.Point(37, 112);
+            this.button4.Location = new System.Drawing.Point(6, 26);
             this.button4.Name = "button4";
             this.button4.Size = new System.Drawing.Size(139, 31);
             this.button4.TabIndex = 3;
@@ -101,7 +107,7 @@
             // 
             // button5
             // 
-            this.button5.Location = new System.Drawing.Point(37, 188);
+            this.button5.Location = new System.Drawing.Point(6, 102);
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(139, 33);
             this.button5.TabIndex = 5;
@@ -136,12 +142,22 @@
             this.groupBox1.Controls.Add(this.btnSerializeProtoBuf);
             this.groupBox1.Controls.Add(this.btnSerializeBinaryFormatter);
             this.groupBox1.Controls.Add(this.btnSerializeJson);
-            this.groupBox1.Location = new System.Drawing.Point(37, 250);
+            this.groupBox1.Location = new System.Drawing.Point(27, 164);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(154, 220);
+            this.groupBox1.Size = new System.Drawing.Size(154, 223);
             this.groupBox1.TabIndex = 8;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Serialize";
+            // 
+            // btnSerializeSql
+            // 
+            this.btnSerializeSql.Location = new System.Drawing.Point(6, 25);
+            this.btnSerializeSql.Name = "btnSerializeSql";
+            this.btnSerializeSql.Size = new System.Drawing.Size(139, 33);
+            this.btnSerializeSql.TabIndex = 10;
+            this.btnSerializeSql.Text = "SQL";
+            this.btnSerializeSql.UseVisualStyleBackColor = true;
+            this.btnSerializeSql.Click += new System.EventHandler(this.btnSerializeSql_Click);
             // 
             // btnSerializeStructArray
             // 
@@ -180,12 +196,22 @@
             this.groupBox2.Controls.Add(this.btnDeserializeProtoBuf);
             this.groupBox2.Controls.Add(this.btnDeserializeBinaryFormatter);
             this.groupBox2.Controls.Add(this.btnDeserializeJson);
-            this.groupBox2.Location = new System.Drawing.Point(197, 250);
+            this.groupBox2.Location = new System.Drawing.Point(187, 164);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(154, 220);
+            this.groupBox2.Size = new System.Drawing.Size(154, 223);
             this.groupBox2.TabIndex = 9;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Deserialize";
+            // 
+            // btnDeserializeSql
+            // 
+            this.btnDeserializeSql.Location = new System.Drawing.Point(6, 25);
+            this.btnDeserializeSql.Name = "btnDeserializeSql";
+            this.btnDeserializeSql.Size = new System.Drawing.Size(139, 33);
+            this.btnDeserializeSql.TabIndex = 11;
+            this.btnDeserializeSql.Text = "SQL";
+            this.btnDeserializeSql.UseVisualStyleBackColor = true;
+            this.btnDeserializeSql.Click += new System.EventHandler(this.btnDeserializeSql_Click);
             // 
             // btnDeserializeStructArray
             // 
@@ -217,43 +243,45 @@
             this.btnDeserializeBinaryFormatter.UseVisualStyleBackColor = true;
             this.btnDeserializeBinaryFormatter.Click += new System.EventHandler(this.btnDeserializeBinaryFormatter_Click);
             // 
-            // btnSerializeSql
+            // groupBox3
             // 
-            this.btnSerializeSql.Location = new System.Drawing.Point(6, 25);
-            this.btnSerializeSql.Name = "btnSerializeSql";
-            this.btnSerializeSql.Size = new System.Drawing.Size(139, 33);
-            this.btnSerializeSql.TabIndex = 10;
-            this.btnSerializeSql.Text = "SQL";
-            this.btnSerializeSql.UseVisualStyleBackColor = true;
-            this.btnSerializeSql.Click += new System.EventHandler(this.btnSerializeSql_Click);
+            this.groupBox3.Controls.Add(this.button1);
+            this.groupBox3.Controls.Add(this.button2);
+            this.groupBox3.Location = new System.Drawing.Point(27, 12);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(154, 146);
+            this.groupBox3.TabIndex = 10;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Create arrays";
             // 
-            // btnDeserializeSql
+            // groupBox4
             // 
-            this.btnDeserializeSql.Location = new System.Drawing.Point(6, 25);
-            this.btnDeserializeSql.Name = "btnDeserializeSql";
-            this.btnDeserializeSql.Size = new System.Drawing.Size(139, 33);
-            this.btnDeserializeSql.TabIndex = 11;
-            this.btnDeserializeSql.Text = "SQL";
-            this.btnDeserializeSql.UseVisualStyleBackColor = true;
-            this.btnDeserializeSql.Click += new System.EventHandler(this.btnDeserializeSql_Click);
+            this.groupBox4.Controls.Add(this.button4);
+            this.groupBox4.Controls.Add(this.button3);
+            this.groupBox4.Controls.Add(this.button5);
+            this.groupBox4.Location = new System.Drawing.Point(187, 12);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(148, 146);
+            this.groupBox4.TabIndex = 11;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Length sample";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(854, 503);
+            this.ClientSize = new System.Drawing.Size(854, 405);
+            this.Controls.Add(this.groupBox4);
+            this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button4);
             this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
             this.Name = "Form1";
             this.Text = "Form1";
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox4.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -279,6 +307,8 @@
         private System.Windows.Forms.Button btnDeserializeBinaryFormatter;
         private System.Windows.Forms.Button btnSerializeSql;
         private System.Windows.Forms.Button btnDeserializeSql;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.GroupBox groupBox4;
     }
 }
 

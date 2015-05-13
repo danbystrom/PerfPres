@@ -63,6 +63,9 @@
     <Compile Include="LengthClass.cs" />
     <Compile Include="Length.cs" />
     <Compile Include="LengthExtensions.cs" />
+    <Compile Include="Optimization Story\BasicAttempt.cs" />
+    <Compile Include="Optimization Story\FirstAttempt.cs" />
+    <Compile Include="Optimization Story\Item.cs" />
     <Compile Include="Physics.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

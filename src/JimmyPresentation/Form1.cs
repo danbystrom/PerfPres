@@ -20,13 +20,16 @@ namespace JimmyPresentation
             InitializeComponent();
         }
 
-        private void benchmark(string text, Func<object> action)
+        private void benchmark(string title, bool dispMem, Func<object> action)
         {
             var mem = GC.GetTotalMemory(true);
             var sw = Stopwatch.StartNew();
             var result = action();
-            textBox1.AppendText(string.Format("{0}: {1:0.000}  {2:0.00}Mb\r\n", text, sw.Elapsed.TotalSeconds, (GC.GetTotalMemory(false) - mem) / (1024 * 1024.0)));
-            if (result.ToString() == "kalle")
+            var text = string.Format("{0}: {1:0.000}  ", title, sw.Elapsed.TotalSeconds);
+            if (dispMem)
+                text += string.Format("   {0:0.0}Mb", (GC.GetTotalMemory(false) - mem)/(1024*1024.0));
+            textBox1.AppendText(text + "\r\n");
+            if (result.ToString() == "kalle")  // cling on the result to make sure that it is not collected until now
                 textBox1.AppendText("Hej Kalle!\r\n");
         }
 
@@ -34,7 +37,7 @@ namespace JimmyPresentation
         {
             var x = new TestStruct[100];
             var y = Marshal.SizeOf(typeof(TestStruct));
-            benchmark("class[]", () =>
+            benchmark("class[]", true, () =>
             {
                 var list = new List<TestClass[]>();
                 for (var i = 0; i < 5; i++)
@@ -45,7 +48,7 @@ namespace JimmyPresentation
 
         private void button2_Click(object sender, EventArgs e)
         {
-            benchmark("struct[]", () =>
+            benchmark("struct[]", true, () =>
             {
                 var list = new List<TestStruct[]>();
                 for (var i = 0; i < 5; i++)
@@ -56,7 +59,7 @@ namespace JimmyPresentation
 
         private void button4_Click(object sender, EventArgs e)
         {
-            benchmark("double[]", () =>
+            benchmark("double[]", true, () =>
             {
                 var list = new List<double[]>();
                 for (var i = 0; i < 100; i++)
@@ -72,7 +75,7 @@ namespace JimmyPresentation
 
         private void button3_Click(object sender, EventArgs e)
         {
-            benchmark("LengthClass[]", () =>
+            benchmark("LengthClass[]", true, () =>
             {
                 var list = new List<LengthClass[]>();
                 for (var i = 0; i < 100; i++)
@@ -88,7 +91,7 @@ namespace JimmyPresentation
 
         private void button5_Click(object sender, EventArgs e)
         {
-            benchmark("Length[]", () =>
+            benchmark("Length[]", true, () =>
             {
                 var list = new List<Length[]>();
                 for (var i = 0; i < 100; i++)
@@ -104,7 +107,7 @@ namespace JimmyPresentation
 
         private void btnSerializeSql_Click(object sender, EventArgs e)
         {
-            benchmark("serialize SQL", () =>
+            benchmark("serialize SQL", false, () =>
             {
                 SqlPersistance.Save(new SerializeTestClass().W);
                 return 0;
@@ -113,7 +116,7 @@ namespace JimmyPresentation
 
         private void btnDeserializeSql_Click(object sender, EventArgs e)
         {
-            benchmark("deserialize SQL", () =>
+            benchmark("deserialize SQL", false, () =>
             {
                 var data = SqlPersistance.Load(1000000);
                 return 0;
@@ -122,7 +125,7 @@ namespace JimmyPresentation
 
         private void btnSerializeJson_Click(object sender, EventArgs e)
         {
-            benchmark("serialize Json", () =>
+            benchmark("serialize Json", false, () =>
             {
                 using (var stream = File.Create(@"c:\temp\hej1.$$$", 0x10000))
                 using (var tw = new StreamWriter(stream, Encoding.UTF8, 0x10000))
@@ -133,7 +136,7 @@ namespace JimmyPresentation
 
         private void btnDeserializeJson_Click(object sender, EventArgs e)
         {
-            benchmark("deserialize Json", () =>
+            benchmark("deserialize Json", false, () =>
             {
                 SerializeTestClass data;
                 using (var stream = new FileStream(@"c:\temp\hej1.$$$", FileMode.Open, FileAccess.Read, FileShare.Read, 0x10000))
@@ -145,7 +148,7 @@ namespace JimmyPresentation
 
         private void btnSerializeBinaryFormatter_Click(object sender, EventArgs e)
         {
-            benchmark("serialize BinaryFormatter", () =>
+            benchmark("serialize BinaryFormatter", false, () =>
             {
                 using (var stream = File.Create(@"c:\temp\hej2.$$$", 0x10000))
                     new BinaryFormatter().Serialize(stream, new SerializeTestClass());
@@ -155,7 +158,7 @@ namespace JimmyPresentation
 
         private void btnDeserializeBinaryFormatter_Click(object sender, EventArgs e)
         {
-            benchmark("deserialize BinaryFormatter", () =>
+            benchmark("deserialize BinaryFormatter", false, () =>
             {
                 SerializeTestClass data;
                 using (var stream = new FileStream(@"c:\temp\hej2.$$$", FileMode.Open, FileAccess.Read, FileShare.Read, 0x10000))
@@ -166,7 +169,7 @@ namespace JimmyPresentation
 
         private void btnSerializeProtoBuf_Click(object sender, EventArgs e)
         {
-            benchmark("serialize ProtoBuf", () =>
+            benchmark("serialize ProtoBuf", false, () =>
             {
                 using (var stream = File.Create(@"c:\temp\hej3.$$$", 0x10000))
                     Serializer.Serialize(stream, new SerializeTestClass());
@@ -176,7 +179,7 @@ namespace JimmyPresentation
 
         private void btnDeserializeProtoBuf_Click(object sender, EventArgs e)
         {
-            benchmark("deserialize ProtoBuf", () =>
+            benchmark("deserialize ProtoBuf", false, () =>
             {
                 SerializeTestClass data;
                 using (var stream = new FileStream(@"c:\temp\hej3.$$$", FileMode.Open, FileAccess.Read, FileShare.Read, 0x10000))
