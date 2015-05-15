@@ -11,8 +11,17 @@ namespace JimmyPresentation
     [Serializable]
     public class SerializeLargeValueObject
     {
-        [ProtoMember(1)]
-        public LargeValueObjectAsStruct[] W = LargeValueObjectHelper.PlayWithStruct();
+        [ProtoMember(1)] public LargeValueObjectAsStruct[] Data;
+
+        protected SerializeLargeValueObject()
+        {
+            
+        }
+
+        public static SerializeLargeValueObject New(int size = 1000000)
+        {
+            return new SerializeLargeValueObject { Data = LargeValueObjectHelper.PlayWithStruct(size) };
+        }
     }
 
 
@@ -73,7 +82,7 @@ namespace JimmyPresentation
         {
             var array = new LargeValueObjectAsClass[1000000];
             for (var i = 1; i < array.Length; i++)
-                array[i] = new LargeValueObjectAsClass(1, 2, 3, 4, 5, 6, 7, 8);
+                array[i] = new LargeValueObjectAsClass(i + 1, i + 2, i + 3, i + 4, i + 5, i + 6, i + 7, i + 8);
             var sum = 0.0;
             for (var i = 1; i < array.Length; i++)
             {
@@ -95,11 +104,11 @@ namespace JimmyPresentation
             return Enumerable.Repeat(0, elements).Select(_ => PlayWithClass()).ToList();
         }
 
-        public static LargeValueObjectAsStruct[] PlayWithStruct()
+        public static LargeValueObjectAsStruct[] PlayWithStruct(int size = 1000000)
         {
-            var array = new LargeValueObjectAsStruct[1000000];
+            var array = new LargeValueObjectAsStruct[size];
             for (var i = 1; i < array.Length; i++)
-                array[i] = new LargeValueObjectAsStruct(1, 2, 3, 4, 5, 6, 7, 8);
+                array[i] = new LargeValueObjectAsStruct(i + 1, i + 2, i + 3, i + 4, i + 5, i + 6, i + 7, i + 8);
             var sum = 0.0;
             for (var i = 1; i < array.Length; i++)
             {
@@ -116,7 +125,7 @@ namespace JimmyPresentation
             return array;
         }
 
-        public static List<LargeValueObjectAsStruct[]> PlayWithStruct(int elements)
+        public static List<LargeValueObjectAsStruct[]> PlayWithStructList(int elements)
         {
             return Enumerable.Repeat(0, elements).Select(_ => PlayWithStruct()).ToList();
         }

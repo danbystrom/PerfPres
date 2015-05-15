@@ -1,6 +1,6 @@
 ﻿namespace JimmyPresentation
 {
-    public static class LengthExtensions
+    public static class SomeLengthExtensions
     {
         public static Length Miles(this double value)
         {

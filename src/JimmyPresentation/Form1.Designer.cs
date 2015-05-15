@@ -28,12 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnLargeClassArray = new System.Windows.Forms.Button();
+            this.btnLargeStructArray = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
+            this.btnEncapsulatedDoubleInClass = new System.Windows.Forms.Button();
+            this.btnDoubleArray = new System.Windows.Forms.Button();
+            this.btnEncapsulatedDoubleInStruct = new System.Windows.Forms.Button();
             this.btnDeserializeJson = new System.Windows.Forms.Button();
             this.btnSerializeJson = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -56,25 +56,25 @@
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
-            // button1
+            // btnLargeClassArray
             // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button1.Location = new System.Drawing.Point(374, 175);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(324, 52);
-            this.button1.TabIndex = 0;
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.btnLargeClassArray.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLargeClassArray.Location = new System.Drawing.Point(374, 175);
+            this.btnLargeClassArray.Name = "btnLargeClassArray";
+            this.btnLargeClassArray.Size = new System.Drawing.Size(324, 52);
+            this.btnLargeClassArray.TabIndex = 0;
+            this.btnLargeClassArray.UseVisualStyleBackColor = true;
+            this.btnLargeClassArray.Click += new System.EventHandler(this.btnLargeClassArray_Click);
             // 
-            // button2
+            // btnLargeStructArray
             // 
-            this.button2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(374, 238);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(324, 52);
-            this.button2.TabIndex = 1;
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
+            this.btnLargeStructArray.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLargeStructArray.Location = new System.Drawing.Point(374, 238);
+            this.btnLargeStructArray.Name = "btnLargeStructArray";
+            this.btnLargeStructArray.Size = new System.Drawing.Size(324, 52);
+            this.btnLargeStructArray.TabIndex = 1;
+            this.btnLargeStructArray.UseVisualStyleBackColor = true;
+            this.btnLargeStructArray.Click += new System.EventHandler(this.btnLargeStructArray_Click);
             // 
             // textBox1
             // 
@@ -86,35 +86,35 @@
             this.textBox1.Size = new System.Drawing.Size(553, 695);
             this.textBox1.TabIndex = 2;
             // 
-            // button3
+            // btnEncapsulatedDoubleInClass
             // 
-            this.button3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button3.Location = new System.Drawing.Point(45, 238);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(294, 52);
-            this.button3.TabIndex = 4;
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.btnEncapsulatedDoubleInClass.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEncapsulatedDoubleInClass.Location = new System.Drawing.Point(45, 238);
+            this.btnEncapsulatedDoubleInClass.Name = "btnEncapsulatedDoubleInClass";
+            this.btnEncapsulatedDoubleInClass.Size = new System.Drawing.Size(294, 52);
+            this.btnEncapsulatedDoubleInClass.TabIndex = 4;
+            this.btnEncapsulatedDoubleInClass.UseVisualStyleBackColor = true;
+            this.btnEncapsulatedDoubleInClass.Click += new System.EventHandler(this.btnEncapsulatedDoubleInClass_Click);
             // 
-            // button4
+            // btnDoubleArray
             // 
-            this.button4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button4.Location = new System.Drawing.Point(45, 175);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(294, 52);
-            this.button4.TabIndex = 3;
-            this.button4.UseVisualStyleBackColor = true;
-            this.button4.Click += new System.EventHandler(this.button4_Click);
+            this.btnDoubleArray.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDoubleArray.Location = new System.Drawing.Point(45, 175);
+            this.btnDoubleArray.Name = "btnDoubleArray";
+            this.btnDoubleArray.Size = new System.Drawing.Size(294, 52);
+            this.btnDoubleArray.TabIndex = 3;
+            this.btnDoubleArray.UseVisualStyleBackColor = true;
+            this.btnDoubleArray.Click += new System.EventHandler(this.btnDoubleArray_Click);
             // 
-            // button5
+            // btnEncapsulatedDoubleInStruct
             // 
-            this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button5.Location = new System.Drawing.Point(45, 302);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(294, 52);
-            this.button5.TabIndex = 5;
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.btnEncapsulatedDoubleInStruct.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnEncapsulatedDoubleInStruct.Location = new System.Drawing.Point(45, 302);
+            this.btnEncapsulatedDoubleInStruct.Name = "btnEncapsulatedDoubleInStruct";
+            this.btnEncapsulatedDoubleInStruct.Size = new System.Drawing.Size(294, 52);
+            this.btnEncapsulatedDoubleInStruct.TabIndex = 5;
+            this.btnEncapsulatedDoubleInStruct.UseVisualStyleBackColor = true;
+            this.btnEncapsulatedDoubleInStruct.Click += new System.EventHandler(this.btnEncapsulatedDoubleInStruct_Click);
             // 
             // btnDeserializeJson
             // 
@@ -320,12 +320,12 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.button5);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button4);
+            this.Controls.Add(this.btnEncapsulatedDoubleInStruct);
+            this.Controls.Add(this.btnEncapsulatedDoubleInClass);
+            this.Controls.Add(this.btnDoubleArray);
             this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnLargeStructArray);
+            this.Controls.Add(this.btnLargeClassArray);
             this.Name = "Form1";
             this.Text = "Perf tips";
             this.groupBox1.ResumeLayout(false);
@@ -337,12 +337,12 @@
 
         #endregion
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnLargeClassArray;
+        private System.Windows.Forms.Button btnLargeStructArray;
         private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button btnEncapsulatedDoubleInClass;
+        private System.Windows.Forms.Button btnDoubleArray;
+        private System.Windows.Forms.Button btnEncapsulatedDoubleInStruct;
         private System.Windows.Forms.Button btnDeserializeJson;
         private System.Windows.Forms.Button btnSerializeJson;
         private System.Windows.Forms.GroupBox groupBox1;

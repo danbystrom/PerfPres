@@ -7,8 +7,8 @@ namespace JimmyPresentation
     public static class SqlPersistence
     {
         private const string ConnectionString =
-            @"Data Source=(localdb)\Projects;Initial Catalog=PerfPres;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
-            //@"Data Source=localhost\SQLEXPRESS;Initial Catalog=PerfPres;Integrated Security=SSPI;"
+            //@"Data Source=(localdb)\Projects;Initial Catalog=PerfPres;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False";
+            @"Data Source=localhost\SQLEXPRESS;Initial Catalog=PerfPres;Integrated Security=SSPI;";
 
         public static DataTable AsDataTable<T>(this IEnumerable<T> data)
         {
@@ -35,12 +35,12 @@ namespace JimmyPresentation
             {
                 conn.Open();
 
-                var commandDelete = new SqlCommand { Connection = conn, CommandText = "DELETE FROM dbo.TestStructTable" };
+                var commandDelete = new SqlCommand {Connection = conn, CommandText = "DELETE FROM dbo.TestStructTable"};
                 commandDelete.ExecuteNonQuery();
             }
         }
 
-        public static void Save(TestStruct[] items)
+        public static void Save(LargeValueObjectAsStruct[] items)
         {
             using (var conn = new SqlConnection(ConnectionString))
             {
@@ -57,31 +57,29 @@ namespace JimmyPresentation
             }
         }
 
-        public static TestStruct[] Load(int size)
+        public static LargeValueObjectAsStruct[] Load(int size)
         {
             using (var conn = new SqlConnection(ConnectionString))
             {
                 conn.Open();
                 using (var cmd = new SqlCommand())
                 {
-                    var result = new TestStruct[size];
+                    var result = new LargeValueObjectAsStruct[size];
 
                     cmd.Connection = conn;
                     cmd.CommandText = "select id,a,b,c,d,e,f,g,h FROM dbo.TestStructTable";
 
                     using (var reader = cmd.ExecuteReader())
                         while (reader.Read())
-                            result[reader.GetInt32(0)] = new TestStruct
-                            {
-                                A = reader.GetDecimal(1),
-                                B = reader.GetDecimal(2),
-                                C = reader.GetDecimal(3),
-                                D = reader.GetDecimal(4),
-                                E = reader.GetDecimal(5),
-                                F = reader.GetDecimal(6),
-                                G = reader.GetDecimal(7),
-                                H = reader.GetDecimal(8),
-                            };
+                            result[reader.GetInt32(0)] = new LargeValueObjectAsStruct(
+                                reader.GetDouble(1),
+                                reader.GetDouble(2),
+                                reader.GetDouble(3),
+                                reader.GetDouble(4),
+                                reader.GetDouble(5),
+                                reader.GetDouble(6),
+                                reader.GetDouble(7),
+                                reader.GetDouble(8));
                     return result;
                 }
             }

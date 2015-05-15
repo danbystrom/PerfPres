@@ -37,7 +37,7 @@ namespace JimmyPresentation
             Cursor.Current = Cursors.Default;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnLargeClassArray_Click(object sender, EventArgs e)
         {
             benchmark("Large instances in class[]", sender, () =>
             {
@@ -45,15 +45,15 @@ namespace JimmyPresentation
             });
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void btnLargeStructArray_Click(object sender, EventArgs e)
         {
             benchmark("Large instances in struct[]", sender, () =>
             {
-                return LargeValueObjectHelper.PlayWithStruct(5);
+                return LargeValueObjectHelper.PlayWithStructList(5);
             });
         }
 
-        private void button4_Click(object sender, EventArgs e)
+        private void btnDoubleArray_Click(object sender, EventArgs e)
         {
             benchmark("double[]", sender, () =>
             {
@@ -69,7 +69,7 @@ namespace JimmyPresentation
             });
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void btnEncapsulatedDoubleInClass_Click(object sender, EventArgs e)
         {
             benchmark("double in a class[]", sender, () =>
             {
@@ -85,7 +85,7 @@ namespace JimmyPresentation
             });
         }
 
-        private void button5_Click(object sender, EventArgs e)
+        private void btnEncapsulatedDoubleInStruct_Click(object sender, EventArgs e)
         {
             benchmark("double in a struct[]", sender, () =>
             {
@@ -107,7 +107,7 @@ namespace JimmyPresentation
 
             benchmark("serialize SQL", sender, () =>
             {
-                SqlPersistence.Save(SerializeTestClass.New().Data);
+                SqlPersistence.Save(SerializeLargeValueObject.New().Data);
                 return 0;
             });
             fixGroupText1();
@@ -137,7 +137,7 @@ namespace JimmyPresentation
             {
                 using (var stream = File.Create(@"c:\temp\hej1.$$$", 0x10000))
                 using (var tw = new StreamWriter(stream, Encoding.UTF8, 0x10000))
-                    JsonSerializer.CreateDefault().Serialize(tw, SerializeTestClass.New());
+                    JsonSerializer.CreateDefault().Serialize(tw, SerializeLargeValueObject.New());
                 return 0;
             });
             fixGroupText1();
@@ -147,10 +147,10 @@ namespace JimmyPresentation
         {
             benchmark("deserialize Json", sender, () =>
             {
-                SerializeTestClass data;
+                SerializeLargeValueObject data;
                 using (var stream = new FileStream(@"c:\temp\hej1.$$$", FileMode.Open, FileAccess.Read, FileShare.Read, 0x10000))
                 using (var tr = new StreamReader(stream))
-                    data = new JsonSerializer().Deserialize<SerializeTestClass>(new JsonTextReader(tr));
+                    data = new JsonSerializer().Deserialize<SerializeLargeValueObject>(new JsonTextReader(tr));
                 return data;
             });
             fixGroupText2();
@@ -161,7 +161,7 @@ namespace JimmyPresentation
             benchmark("serialize BinaryFormatter", sender, () =>
             {
                 using (var stream = File.Create(@"c:\temp\hej2.$$$", 0x10000))
-                    new BinaryFormatter().Serialize(stream, SerializeTestClass.New());
+                    new BinaryFormatter().Serialize(stream, SerializeLargeValueObject.New());
                 return 0;
             });
             fixGroupText1();
@@ -171,9 +171,9 @@ namespace JimmyPresentation
         {
             benchmark("deserialize BinaryFormatter", sender, () =>
            {
-                SerializeTestClass data;
+               SerializeLargeValueObject data;
                 using (var stream = new FileStream(@"c:\temp\hej2.$$$", FileMode.Open, FileAccess.Read, FileShare.Read, 0x10000))
-                    data = (SerializeTestClass)(new BinaryFormatter().Deserialize(stream));
+                    data = (SerializeLargeValueObject)(new BinaryFormatter().Deserialize(stream));
                 return data;
             });
             fixGroupText2();
@@ -184,7 +184,7 @@ namespace JimmyPresentation
             benchmark("serialize ProtoBuf", sender, () =>
             {
                 using (var stream = File.Create(@"c:\temp\hej3.$$$", 0x10000))
-                    Serializer.Serialize(stream, SerializeTestClass.New());
+                    Serializer.Serialize(stream, SerializeLargeValueObject.New());
                 return 0;
             });
             fixGroupText1();
@@ -194,9 +194,9 @@ namespace JimmyPresentation
         {
             benchmark("deserialize ProtoBuf", sender, () =>
            {
-                SerializeTestClass data;
+               SerializeLargeValueObject data;
                 using (var stream = new FileStream(@"c:\temp\hej3.$$$", FileMode.Open, FileAccess.Read, FileShare.Read, 0x10000))
-                    data = Serializer.Deserialize<SerializeTestClass>(stream);
+                    data = Serializer.Deserialize<SerializeLargeValueObject>(stream);
                 return data.Data[0].A;
             });
             fixGroupText2();
@@ -204,7 +204,7 @@ namespace JimmyPresentation
 
         private void btnSerializeStructArray_Click(object sender, EventArgs e)
         {
-            var thisData = new List<LargeValueObjectAsStruct[]> { new SerializeLargeValueObject().W };
+            var thisData = new List<LargeValueObjectAsStruct[]> { SerializeLargeValueObject.New().Data };
             benchmark("serialize struct[]", sender, () =>
             {
                 using (var stream = File.Create(@"c:\temp\hej4.$$$", 0x10000))
@@ -220,11 +220,6 @@ namespace JimmyPresentation
         {
             benchmark("deserialize struct[]", sender, () =>
             {
-                //var data = new List<TestStruct[]>();
-                //using (var stream = new FileStream(@"c:\temp\hej4.$$$", FileMode.Open, FileAccess.Read, FileShare.Read, 0x10000))
-                //using (var br = new BinaryReader(stream))
-                //    FillUpSomeData.LoadTestStructArrayListFromStream(data, br);
-                //return data;
                 var data = new List<LargeValueObjectAsStruct[]>();
                 using (var stream = new FileStream(@"c:\temp\hej4.$$$", FileMode.Open, FileAccess.Read, FileShare.Read, 0x10000))
                 using (var br = new BinaryReader(stream))

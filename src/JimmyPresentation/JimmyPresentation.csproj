@@ -65,12 +65,11 @@
     </Compile>
     <Compile Include="LengthClass.cs" />
     <Compile Include="Length.cs" />
-    <Compile Include="LengthExtensions.cs" />
+    <Compile Include="SomeLengthExtensions.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlPersistence.cs" />
     <Compile Include="TestLength.cs" />
-    <Compile Include="TestClass.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

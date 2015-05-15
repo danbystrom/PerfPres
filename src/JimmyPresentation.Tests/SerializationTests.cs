@@ -1,13 +1,8 @@
-﻿using System;
-using System.CodeDom;
-using System.Collections.Generic;
-using System.Diagnostics;
+﻿using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using System.Threading.Tasks;
 using NUnit.Framework;
+using ProtoBuf;
 
 namespace JimmyPresentation.Tests
 {
@@ -15,9 +10,9 @@ namespace JimmyPresentation.Tests
     public class SerializationTests
     {
         [Test]
-        public void X()
+        public void TestRawSerializerInMemory()
         {
-            var thisData = new List<LargeValueObjectAsStruct[]> { new SerializeLargeValueObject().W };
+            var thisData = new List<LargeValueObjectAsStruct[]> {SerializeLargeValueObject.New(1000).Data};
             var ms = new MemoryStream();
             LargeValueObjectHelper.SaveTestStructArrayListToStream(thisData, new BinaryWriter(ms));
 
@@ -28,5 +23,22 @@ namespace JimmyPresentation.Tests
             Assert.AreEqual(thisData.First().First().A, boomerang.First().First().A);
             Assert.AreEqual(thisData.Last().Last().A, boomerang.Last().Last().A);
         }
+
+        [Test]
+        public void TestProtobufSerializerInMemory()
+        {
+            var thisData = SerializeLargeValueObject.New(1000).Data;
+            
+            using (var stream = File.Create(@"c:\temp\hej3.$$$", 0x10000))
+                    Serializer.Serialize(stream, SerializeLargeValueObject.New(1000));
+            SerializeLargeValueObject boomerang;
+                using (var stream = new FileStream(@"c:\temp\hej3.$$$", FileMode.Open, FileAccess.Read, FileShare.Read, 0x10000))
+                    boomerang = Serializer.Deserialize<SerializeLargeValueObject>(stream);
+
+                Assert.AreEqual(thisData.First().A, boomerang.Data.First().A);
+                Assert.AreEqual(thisData.Last().A, boomerang.Data.Last().A);
+        }
+
     }
+
 }
